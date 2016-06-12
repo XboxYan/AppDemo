@@ -14,12 +14,13 @@ import {
     Text,
     View
 } from 'react-native';
+import Detail1 from './page1';
 //构造路由
 class MyProject extends Component {
 
 
     renderSceneAndroid(route, navigator) {
-        _navigator = navigator;
+
         let Component = route.name;
         return (
             <Component {...route.prams} navigator={navigator} route={route} />
@@ -46,54 +47,40 @@ class MyProject extends Component {
 //主页
 class Main extends Component {
 
-    _pressButton(text) {
-        alert(text)
+    /*_pressButton(Detail) {
+        //alert(text)
         const { navigator } = this.props;
         if (navigator) {
             navigator.push({
                 name: Detail,
                 prams:{
-                    text:text
+                    //text:text
                 }
             })
         }
-    }
+    }*/
     render() {
         return (
             <ScrollView>
-                <TouchableOpacity onPress={this._pressButton.bind(this,'3') } style={styles.item} text='内容1'><Text>11111111111111111111</Text></TouchableOpacity>
-                <TouchableOpacity onPress={this._pressButton.bind(this,'内容2') } style={styles.item} text='内容2'><Text>22222222222222222222</Text></TouchableOpacity>
-                <TouchableOpacity onPress={this._pressButton.bind(this,'内容3') } style={styles.item} text='内容3'><Text>33333333333333333333</Text></TouchableOpacity>
-                <TouchableOpacity onPress={this._pressButton.bind(this,'内容4') } style={styles.item} text='内容4'><Text>4444444444444444444444</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() =>this.props.navigator.push({name:Detail1}) } style={styles.item} ><Text>跳转到11111111111111111111</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() =>this.props.navigator.push({name:Detail2}) } style={styles.item} ><Text>跳转到22222222222222222222</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() =>this.props.navigator.push({name:Detail3}) } style={styles.item} ><Text>跳转到33333333333333333333</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() =>this.props.navigator.push({name:Detail4}) } style={styles.item} ><Text>跳转到4444444444444444444444</Text></TouchableOpacity>
             </ScrollView>
         )
     }
 }
 
-//详情页
-class Detail extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            text:''
-        }
-    }
-    _pressButton() {
-        const { navigator } = this.props;
-        if (navigator) {
-            navigator.pop();
-        }
-    }
-    componentDidMount(){
-        this.setState({
-            text:this.props.text
-        })
-    }
+
+
+//详情页2
+class Detail2 extends Component {
+
     render() {
         return (
             <ScrollView style={{ flex: 1, backgroundColor: '#fff' }}>
-                <View><Text>{this.state.text}</Text></View>
-                <TouchableOpacity onPress={this._pressButton.bind(this) } style={styles.item}><Text>返回</Text></TouchableOpacity>
+                <View><Text>22222222222222</Text></View>
+                <TouchableOpacity onPress={() => this.props.navigator.pop() } style={styles.item}><Text>返回</Text></TouchableOpacity>
             </ScrollView>
         )
     }
@@ -101,8 +88,31 @@ class Detail extends Component {
 
 
 
+//详情页3
+class Detail3 extends Component {
 
+    render() {
+        return (
+            <ScrollView style={{ flex: 1, backgroundColor: '#fff' }}>
+                <View><Text>3333333333333</Text></View>
+                <TouchableOpacity onPress={() => this.props.navigator.pop() } style={styles.item}><Text>返回</Text></TouchableOpacity>
+            </ScrollView>
+        )
+    }
+}
 
+//详情页4
+class Detail4 extends Component {
+
+    render() {
+        return (
+            <ScrollView style={{ flex: 1, backgroundColor: '#fff' }}>
+                <View><Text>44444444444444444</Text></View>
+                <TouchableOpacity onPress={() => this.props.navigator.pop() } style={styles.item}><Text>返回</Text></TouchableOpacity>
+            </ScrollView>
+        )
+    }
+}
 
 
 const styles = StyleSheet.create({
