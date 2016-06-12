@@ -9,12 +9,16 @@ import {
     StyleSheet,
     PixelRatio,
     Navigator,
+    DrawerLayoutAndroid,
     ScrollView,
     TouchableOpacity,
     Text,
     View
 } from 'react-native';
 import Detail1 from './page1';
+import Detail2 from './page2';
+import Detail3 from './page3';
+
 //构造路由
 class MyProject extends Component {
 
@@ -28,19 +32,35 @@ class MyProject extends Component {
     }
 
     render() {
+        //侧边栏
+        let navigationView=(
+            <View style={{flex:1}}>
+                <Text>侧边栏</Text>
+            </View>
+        )
+
         return (
-            <Navigator
-                //初始化
-                initialRoute = {{ name: Main}}
-                //配置场景
-                /*configureScene = {
-                    (route) => {
-                        //页面跳转动画
-                        return Navigator.SceneConfigs.PushFromRight;
-                    }
-                }*/
-                renderScene = {this.renderSceneAndroid}
-                />
+                <DrawerLayoutAndroid 
+                    drawerLockMode = 'locked-closed'
+                    ref={(drawer) => { this.drawer = drawer; }}
+                    drawerWidth={200}
+                    drawerPosition={DrawerLayoutAndroid.positions.Left}
+                    renderNavigationView={()=>navigationView}
+                >
+                    
+                    <Navigator
+                    //初始化
+                    initialRoute = {{ name: Main ,_this:this}}
+                    //配置场景
+                    /*configureScene = {
+                        (route) => {
+                            //页面跳转动画
+                            return Navigator.SceneConfigs.PushFromRight;
+                        }
+                    }*/
+                    renderScene = {this.renderSceneAndroid}
+                    />
+                </DrawerLayoutAndroid>
         );
     }
 }
@@ -60,12 +80,14 @@ class Main extends Component {
         }
     }*/
     render() {
+        let _this = this.props.route._this;
         return (
             <ScrollView>
-                <TouchableOpacity onPress={() =>this.props.navigator.push({name:Detail1}) } style={styles.item} ><Text>跳转到11111111111111111111</Text></TouchableOpacity>
-                <TouchableOpacity onPress={() =>this.props.navigator.push({name:Detail2}) } style={styles.item} ><Text>跳转到22222222222222222222</Text></TouchableOpacity>
-                <TouchableOpacity onPress={() =>this.props.navigator.push({name:Detail3}) } style={styles.item} ><Text>跳转到33333333333333333333</Text></TouchableOpacity>
-                <TouchableOpacity onPress={() =>this.props.navigator.push({name:Detail4}) } style={styles.item} ><Text>跳转到4444444444444444444444</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => _this.drawer.openDrawer() } style={styles.item} ><Text>打开抽屉</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.navigator.push({ name: Detail1 ,_this:_this}) } style={styles.item} ><Text>跳转到11111111111111111111</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.navigator.push({ name: Detail2 }) } style={styles.item} ><Text>跳转到22222222222222222222</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.navigator.push({ name: Detail3 }) } style={styles.item} ><Text>跳转到33333333333333333333</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.navigator.push({ name: Detail4 }) } style={styles.item} ><Text>跳转到4444444444444444444444</Text></TouchableOpacity>
             </ScrollView>
         )
     }
@@ -73,33 +95,10 @@ class Main extends Component {
 
 
 
-//详情页2
-class Detail2 extends Component {
-
-    render() {
-        return (
-            <ScrollView style={{ flex: 1, backgroundColor: '#fff' }}>
-                <View><Text>22222222222222</Text></View>
-                <TouchableOpacity onPress={() => this.props.navigator.pop() } style={styles.item}><Text>返回</Text></TouchableOpacity>
-            </ScrollView>
-        )
-    }
-}
 
 
 
-//详情页3
-class Detail3 extends Component {
 
-    render() {
-        return (
-            <ScrollView style={{ flex: 1, backgroundColor: '#fff' }}>
-                <View><Text>3333333333333</Text></View>
-                <TouchableOpacity onPress={() => this.props.navigator.pop() } style={styles.item}><Text>返回</Text></TouchableOpacity>
-            </ScrollView>
-        )
-    }
-}
 
 //详情页4
 class Detail4 extends Component {
