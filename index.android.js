@@ -12,12 +12,14 @@ import {
     DrawerLayoutAndroid,
     ScrollView,
     TouchableOpacity,
+    StatusBar,
     Text,
     View
 } from 'react-native';
 import Detail1 from './page1';
 import Detail2 from './page2';
 import Detail3 from './page3';
+import Detail4 from './page4';
 
 //构造路由
 class MyProject extends Component {
@@ -47,7 +49,10 @@ class MyProject extends Component {
                     drawerPosition={DrawerLayoutAndroid.positions.Left}
                     renderNavigationView={()=>navigationView}
                 >
-                    
+                    <StatusBar
+                        //translucent = {true}
+                        backgroundColor = '#fff'
+                    />   
                     <Navigator
                     //初始化
                     initialRoute = {{ name: Main ,_this:this}}
@@ -82,32 +87,12 @@ class Main extends Component {
     render() {
         let _this = this.props.route._this;
         return (
-            <ScrollView>
+            <ScrollView style={{backgroundColor:'green'}}>
                 <TouchableOpacity onPress={() => _this.drawer.openDrawer() } style={styles.item} ><Text>打开抽屉</Text></TouchableOpacity>
                 <TouchableOpacity onPress={() => this.props.navigator.push({ name: Detail1 ,_this:_this}) } style={styles.item} ><Text>跳转到11111111111111111111</Text></TouchableOpacity>
                 <TouchableOpacity onPress={() => this.props.navigator.push({ name: Detail2 }) } style={styles.item} ><Text>跳转到22222222222222222222</Text></TouchableOpacity>
                 <TouchableOpacity onPress={() => this.props.navigator.push({ name: Detail3 }) } style={styles.item} ><Text>跳转到33333333333333333333</Text></TouchableOpacity>
                 <TouchableOpacity onPress={() => this.props.navigator.push({ name: Detail4 }) } style={styles.item} ><Text>跳转到4444444444444444444444</Text></TouchableOpacity>
-            </ScrollView>
-        )
-    }
-}
-
-
-
-
-
-
-
-
-//详情页4
-class Detail4 extends Component {
-
-    render() {
-        return (
-            <ScrollView style={{ flex: 1, backgroundColor: '#fff' }}>
-                <View><Text>44444444444444444</Text></View>
-                <TouchableOpacity onPress={() => this.props.navigator.pop() } style={styles.item}><Text>返回</Text></TouchableOpacity>
             </ScrollView>
         )
     }

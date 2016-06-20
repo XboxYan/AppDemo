@@ -39,8 +39,7 @@ class Detail2 extends Component {
                 <Button>点击4</Button>
                 <View style={styles.margin}><Text>页面222222222222</Text></View>
                 <View style={styles.margin}><Text>进度条水平 Horizontal</Text></View>
-                <ProgressBarAndroid styleAttr='Horizontal' progress={0.2}
-            indeterminate={false} />
+                <ProgressBarAndroid styleAttr='Horizontal' progress={0.2} indeterminate={false} />
                 <View style={styles.margin}><Text>进度条 Small</Text></View>
                 <ProgressBarAndroid styleAttr='Small' />
                 <View style={styles.margin}><Text>进度条 Large</Text></View>
