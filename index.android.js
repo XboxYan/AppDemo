@@ -22,7 +22,7 @@ import Detail3 from './page3';
 import Detail4 from './page4';
 
 //构造路由
-class MyProject extends Component {
+class AppDemo extends Component {
 
 
     renderSceneAndroid(route, navigator) {
@@ -111,4 +111,4 @@ const styles = StyleSheet.create({
     }
 });
 
-AppRegistry.registerComponent('MyProject', () => MyProject);
+AppRegistry.registerComponent('AppDemo', () => AppDemo);
